@@ -9,16 +9,17 @@ import java.io.Serializable;
 public class DatoIngreso implements Serializable {
 
 
-    String id;
+    int id;
     String titulo;
     String descripcion;
-    String valor;
+    int valor;
     String fecha;
-    public DatoIngreso(String i,String t,String v,String f){
+    public DatoIngreso(int i,String t, String d, int v,String f){
+        id = i;
         titulo = t;
+        descripcion = d;
         valor = v;
         fecha = f;
-        id = i;
     }
 
     public String getTitulo() {
@@ -30,7 +31,7 @@ public class DatoIngreso implements Serializable {
     }
 
 
-    public String getValor() {
+    public int getValor() {
         return valor;
     }
 
@@ -46,7 +47,7 @@ public class DatoIngreso implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public void setValor(String valor) {
+    public void setValor(int valor) {
         this.valor = valor;
     }
 
@@ -54,11 +55,11 @@ public class DatoIngreso implements Serializable {
         this.fecha = fecha;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

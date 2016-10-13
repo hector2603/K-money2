@@ -1,8 +1,13 @@
 package com.example.hector.k_money;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Andres on 13/10/2016.
@@ -29,5 +34,35 @@ public class MiBaseDatos extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXIST " + TABLA_INGRESOS);
         onCreate(db);
+    }
+
+    public void insertarIngreso(int id, String titulo, String descripcion, int valor, String fecha){
+        SQLiteDatabase db = getWritableDatabase();
+        if(db != null){
+            ContentValues valores = new ContentValues();
+            valores.put("id_ingresos", id);
+            valores.put("titulo", titulo);
+            valores.put("descripcion", descripcion);
+            valores.put("valor", valor);
+            valores.put("fecha", fecha);
+            db.insert("ingresos", null, valores);
+            db.close();
+        }
+    }
+
+    public ArrayList<DatoIngreso> consultarIngresos(){
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<DatoIngreso> listaIngresos = new ArrayList<DatoIngreso>();
+        String[] valores_recuperar = {"id_ingresos","titulo","descripcion","valor","fecha"};
+        Cursor c = db.query("ingresos", valores_recuperar, null, null, null, null, null, null);
+        c.moveToFirst();
+        do{
+            DatoIngreso datoIngreso = new DatoIngreso(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3),
+                    c.getString(4));
+            listaIngresos.add(datoIngreso);
+        } while(c.moveToNext());
+        db.close();
+        c.close();
+        return listaIngresos;
     }
 }

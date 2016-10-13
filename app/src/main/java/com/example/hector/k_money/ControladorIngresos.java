@@ -56,9 +56,9 @@ public class ControladorIngresos implements View.OnClickListener,AdapterView.OnI
 
             Intent cambio = new Intent(vista, consultarIngresos.class);
             ArrayList<DatoIngreso> ingresos_list = new ArrayList<DatoIngreso>();
-            ingresos_list.add(new DatoIngreso("1","empanadas ricas","500","5-5-5"));
-            ingresos_list.add(new DatoIngreso("2","empanadas ricas2","600","6-5-5"));
-            ingresos_list.add(new DatoIngreso("3","empanadas ricas3","700","7-5-5"));
+            ingresos_list.add(new DatoIngreso(1,"","empanadas ricas",500,"5-5-5"));
+            ingresos_list.add(new DatoIngreso(2,"","empanadas ricas2",600,"6-5-5"));
+            ingresos_list.add(new DatoIngreso(3,"","empanadas ricas3",700,"7-5-5"));
             cambio.putExtra("datos",ingresos_list);
             vista.startActivity(cambio);
         }
@@ -72,7 +72,7 @@ public class ControladorIngresos implements View.OnClickListener,AdapterView.OnI
                 Toast.LENGTH_SHORT).show();
 
         Intent cambio = new Intent(vista, VerIngreso.class);
-        String id_ingre = actual.getId();
+        int id_ingre = actual.getId();
         cambio.putExtra("titulo",actual.getTitulo());
         cambio.putExtra("descripcion",actual.getDescripcion());
         cambio.putExtra("valor",actual.getValor());
