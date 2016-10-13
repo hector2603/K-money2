@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.hector.k_money.Inicio">
+    <item
+        android:id="@+id/Ingreso"
+        android:orderInCategory="100"
+        android:title="@string/Ingreso"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/Egreso"
+        android:orderInCategory="100"
+        android:title="@string/Egreso"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/Deudas"
+        android:orderInCategory="100"
+        android:title="@string/Deudas"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">K-Money</string>
+    <string name="action_settings">Configuración</string>
+    <string name="Ingreso">Ingreso</string>
+    <string name="Egreso">Egreso</string>
+    <string name="Deudas">Deudas</string>
+    <string name="title_activity_ingresos">Ingresos</string>
+    <string name="Bienvenido">Bienvenido</string>
+    <string name="logotipo">Logotipo</string>
+    <string name="ingresos">Ingresos</string>
+    <string name="crear_ingreso">Crear Ingreso</string>
+    <string name="consultar_ingreso">Consultar ingreso</string>
+    <string name="title_activity_crear_ingreso">CrearIngreso</string>
+    <string name="titulo">Título: *</string>
+    <string name="descripcion">Descripción:</string>
+    <string name="valor">Valor:*</string>
+    <string name="fecha">Fecha:*</string>
+    <string name="title_activity_ver_ingreso">VerIngreso</string>
+    <string name="editar">Editar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="guardar">Guardar</string>
+    <string name="title_activity_consultar_ingresos">consultarIngresos</string>
+</resources>
