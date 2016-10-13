@@ -12,7 +12,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.hector.k_money.CrearIngreso"
     tools:showIn="@layout/activity_crear_ingreso"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <TextView
         android:text="@string/titulo"
@@ -90,5 +91,12 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:elevation="0dp"
         android:background="@android:color/holo_blue_dark" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/editText2" />
 
 </LinearLayout>
