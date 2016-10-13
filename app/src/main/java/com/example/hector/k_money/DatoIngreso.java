@@ -1,10 +1,12 @@
 package com.example.hector.k_money;
 
+import java.io.Serializable;
+
 /**
  * Created by hector on 13/10/2016.
  */
 
-public class DatoIngreso {
+public class DatoIngreso implements Serializable {
 
 
     String id;

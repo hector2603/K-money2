@@ -1,5 +1,6 @@
 package com.example.hector.k_money;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -38,13 +39,14 @@ public class consultarIngresos extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //Obteniendo componentes de la vista
         listaIngresos = (ListView) findViewById(R.id.lista_ingresos);
-
-        ArrayList<DatoIngreso> ingresos_list = new ArrayList<DatoIngreso>();
-        ingresos_list.add(new DatoIngreso("1","empanadas ricas","500","5-5-5"));
-        ingresos_list.add(new DatoIngreso("2","empanadas ricas2","600","6-5-5"));
-        ingresos_list.add(new DatoIngreso("3","empanadas ricas3","700","7-5-5"));
+        // creando intent para recibir los datos del controlador
+        Intent cambio = getIntent();
+        // recibir el rray list del controlador con todos los datos
+        ArrayList<DatoIngreso> ingresos_list = (ArrayList<DatoIngreso>) cambio.getSerializableExtra("datos");
+        // al listview le asigna el adepter con la lista
         datos = new AdapterIngreso(this,ingresos_list);
         listaIngresos.setAdapter(datos);
+        //a la lista le asigna el oyente, que sera controlador
         controlador = new ControladorIngresos(this);
         listaIngresos.setOnItemClickListener(controlador);
     }

@@ -7,6 +7,8 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Created by hector on 12/10/2016.
  */
@@ -50,6 +52,15 @@ public class ControladorIngresos implements View.OnClickListener,AdapterView.OnI
                 vista.startActivity(cambio);
             }
 
+        }else if(id==R.id.consultar_ingreso){
+
+            Intent cambio = new Intent(vista, consultarIngresos.class);
+            ArrayList<DatoIngreso> ingresos_list = new ArrayList<DatoIngreso>();
+            ingresos_list.add(new DatoIngreso("1","empanadas ricas","500","5-5-5"));
+            ingresos_list.add(new DatoIngreso("2","empanadas ricas2","600","6-5-5"));
+            ingresos_list.add(new DatoIngreso("3","empanadas ricas3","700","7-5-5"));
+            cambio.putExtra("datos",ingresos_list);
+            vista.startActivity(cambio);
         }
     }
 
@@ -59,6 +70,14 @@ public class ControladorIngresos implements View.OnClickListener,AdapterView.OnI
         Toast.makeText(view.getContext(),
                 "Iniciar screen de detalle para: \n" + actual.getTitulo(),
                 Toast.LENGTH_SHORT).show();
+
+        Intent cambio = new Intent(vista, VerIngreso.class);
+        String id_ingre = actual.getId();
+        cambio.putExtra("titulo",actual.getTitulo());
+        cambio.putExtra("descripcion",actual.getDescripcion());
+        cambio.putExtra("valor",actual.getValor());
+        cambio.putExtra("fecha",actual.getFecha());
+        vista.startActivity(cambio);
     }
 
 

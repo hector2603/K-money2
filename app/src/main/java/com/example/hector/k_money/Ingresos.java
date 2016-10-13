@@ -25,7 +25,8 @@ public class Ingresos extends AppCompatActivity implements OnClickListener{
         botonCrear = (Button) findViewById(R.id.crear_ingreso);
         consultarIngreso = (Button) findViewById(R.id.consultar_ingreso);
         botonCrear.setOnClickListener(this);
-        consultarIngreso.setOnClickListener(this);
+        ControladorIngresos controlador = new ControladorIngresos(this);
+        consultarIngreso.setOnClickListener(controlador);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -70,9 +71,6 @@ public class Ingresos extends AppCompatActivity implements OnClickListener{
 
         if(id== R.id.crear_ingreso){
             Intent cambio = new Intent(Ingresos.this, CrearIngreso.class);
-            startActivity(cambio);
-        }else if(id== R.id.consultar_ingreso){
-            Intent cambio = new Intent(Ingresos.this, consultarIngresos.class);
             startActivity(cambio);
         }
 
