@@ -19,7 +19,7 @@ public class MiBaseDatos extends SQLiteOpenHelper{
     private static final String NOMBRE_BASEDATOS = "k-money";
     //sentencia para la creacion de una tabla
     private static final String TABLA_INGRESOS =  "CREATE TABLE ingresos" +
-            "(id_ingresos INT PRIMARY KEY, titulo TEXT, descripcion TEXT, valor INT, fecha DATE)";
+            "(id_ingresos INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, descripcion TEXT, valor INT, fecha DATE)";
 
     public MiBaseDatos(Context context) {
         super(context, NOMBRE_BASEDATOS, null, VERSION_BASEDATOS);
@@ -32,15 +32,15 @@ public class MiBaseDatos extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXIST " + TABLA_INGRESOS);
+        db.execSQL("DROP TABLE IF EXIST ingresos");
         onCreate(db);
     }
 
-    public void insertarIngreso(int id, String titulo, String descripcion, int valor, String fecha){
+    public void insertarIngreso(String titulo, String descripcion, int valor, String fecha){
         SQLiteDatabase db = getWritableDatabase();
         if(db != null){
             ContentValues valores = new ContentValues();
-            valores.put("id_ingresos", id);
+            //valores.put("id_ingresos", id);
             valores.put("titulo", titulo);
             valores.put("descripcion", descripcion);
             valores.put("valor", valor);
@@ -64,5 +64,23 @@ public class MiBaseDatos extends SQLiteOpenHelper{
         db.close();
         c.close();
         return listaIngresos;
+    }
+
+    public void modificarIngreso(int id, String titulo, String descripcion, int valor, String fecha){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put("id_ingresos", id);
+        valores.put("titulo", titulo);
+        valores.put("descripcion", descripcion);
+        valores.put("valor", valor);
+        valores.put("fecha", fecha);
+        db.update("ingresos", valores, "id_ingreso="+id, null);
+        db.close();
+    }
+
+    public void borrarIngreso(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete("ingresos", "id_ingresos="+id, null);
+        db.close();
     }
 }
