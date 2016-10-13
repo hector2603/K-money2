@@ -3,6 +3,7 @@ package com.example.hector.k_money;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -10,9 +11,11 @@ import android.widget.Toast;
  * Created by hector on 12/10/2016.
  */
 
-public class ControladorIngresos implements View.OnClickListener{
+public class ControladorIngresos implements View.OnClickListener,AdapterView.OnItemClickListener{
+
     AppCompatActivity vista;
     EditText titulo, descripcion,valor,fecha;
+
     public ControladorIngresos(AppCompatActivity v){
         vista = v;
     }
@@ -49,4 +52,14 @@ public class ControladorIngresos implements View.OnClickListener{
 
         }
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        DatoIngreso actual = (DatoIngreso) parent.getItemAtPosition(position);
+        Toast.makeText(view.getContext(),
+                "Iniciar screen de detalle para: \n" + actual.getTitulo(),
+                Toast.LENGTH_SHORT).show();
+    }
+
+
 }

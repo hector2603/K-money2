@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="8dp">
+    android:background="?attr/selectableItemBackground"">
+
+    <TextView
+        android:id="@+id/list_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/list_titulo"
+        android:layout_below="@+id/list_valor"
+        android:text="@string/fecha"
+        tools:text="10/10/16" />
+
+    <TextView
+        android:id="@+id/list_valor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/valor"
+        tools:text="5000"
+        android:layout_below="@+id/list_titulo"
+        android:layout_alignLeft="@+id/list_fecha"
+        android:layout_alignStart="@+id/list_fecha" />
+
+    <TextView
+        android:id="@+id/list_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="54dp"
+        android:text="@string/titulo"
+        android:textAppearance="?attr/textAppearanceListItem"
+        tools:text="Empanadita rica"
+        android:layout_marginStart="54dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

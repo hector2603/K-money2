@@ -12,9 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class consultarIngresos extends AppCompatActivity {
     ListView listaIngresos;
-    ArrayAdapter<String> datos;
+    AdapterIngreso datos;
+    ControladorIngresos controlador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,24 +39,14 @@ public class consultarIngresos extends AppCompatActivity {
         //Obteniendo componentes de la vista
         listaIngresos = (ListView) findViewById(R.id.lista_ingresos);
 
-        String[] nombres = {
-                "Alexander Pierrot",
-                "Carlos Lopez",
-                "Sara Bonz",
-                "Liliana Clarence",
-                "Benito Peralta",
-                "Juan Jaramillo",
-                "Christian Steps",
-                "Alexa Giraldo",
-                "Linda Murillo",
-                "Lizeth Astrada"
-        };
-
-        datos = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                nombres);
+        ArrayList<DatoIngreso> ingresos_list = new ArrayList<DatoIngreso>();
+        ingresos_list.add(new DatoIngreso("1","empanadas ricas","500","5-5-5"));
+        ingresos_list.add(new DatoIngreso("2","empanadas ricas2","600","6-5-5"));
+        ingresos_list.add(new DatoIngreso("3","empanadas ricas3","700","7-5-5"));
+        datos = new AdapterIngreso(this,ingresos_list);
         listaIngresos.setAdapter(datos);
+        controlador = new ControladorIngresos(this);
+        listaIngresos.setOnItemClickListener(controlador);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
