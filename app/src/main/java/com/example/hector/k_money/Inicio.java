@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,19 @@ public class Inicio extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        //Prueba de DB
+        MiBaseDatos MDB = new MiBaseDatos(getApplicationContext());
+        //MDB.insertarIngreso("HOLA", "HOLADESCRI", 123546, "12/01/2016");
+        //MDB.insertarIngreso("HOLA2", "HOLADESCRI", 123546, "12/01/2016");
+        //MDB.insertarIngreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
+        //recuperar datos
+        //MDB.borrarIngreso(0);
+        int[] ids = new int[MDB.consultarIngresos().size()];
+        for(int i=0; i < MDB.consultarIngresos().size(); i++){
+            ids[i] = MDB.consultarIngresos().get(i).getId();
+            Log.d("hola encontro uno",""+ids[i]);
+        }
+
     }
 
     @Override
