@@ -65,6 +65,8 @@ public class consultarIngresos extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.Ingreso) {
+            Intent cambio = new Intent(consultarIngresos.this,Ingresos.class);
+            startActivity(cambio);
             return true;
         }else if(id==R.id.Egreso){
             Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();

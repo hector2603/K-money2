@@ -42,14 +42,23 @@ public class ControladorIngresos implements View.OnClickListener,AdapterView.OnI
             if(titulo.getText().toString().equals("") || valor.getText().toString().equals("") || fecha.getText().toString().equals("")){
                 Toast.makeText(vista.getApplicationContext(), "Faltan Datos "+datos, Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(vista.getApplicationContext(), "Datos correctos"+datos, Toast.LENGTH_SHORT).show();
-                //AQUÍ ira la creacion en la BD
-                Intent cambio = new Intent(vista, VerIngreso.class);
-                cambio.putExtra("titulo",titulo.getText().toString());
-                cambio.putExtra("descripcion",descripcion.getText().toString());
-                cambio.putExtra("valor",valor.getText().toString());
-                cambio.putExtra("fecha",fecha.getText().toString());
-                vista.startActivity(cambio);
+                if(vista.getIntent().getStringExtra("tipo").equals("crear")){
+                    Toast.makeText(vista.getApplicationContext(), "Creado", Toast.LENGTH_SHORT).show();
+                    //AQUÍ ira la creacion en la BD
+                    Intent cambio = new Intent(vista, consultarIngresos.class);
+                    cambio.putExtra("titulo",titulo.getText().toString());
+                    cambio.putExtra("descripcion",descripcion.getText().toString());
+                    cambio.putExtra("valor",valor.getText().toString());
+                    cambio.putExtra("fecha",fecha.getText().toString());
+                    vista.startActivity(cambio);
+                }else if(vista.getIntent().getStringExtra("tipo").equals("modificar")){
+                    Toast.makeText(vista.getApplicationContext(), "Modificado", Toast.LENGTH_SHORT).show();
+                    Intent cambio = new Intent(vista, consultarIngresos.class);
+                    vista.startActivity(cambio);
+                }else{
+                    Toast.makeText(vista.getApplicationContext(), "No pasa nada", Toast.LENGTH_SHORT).show();
+                }
+
             }
 
         }else if(id==R.id.consultar_ingreso){
@@ -61,6 +70,17 @@ public class ControladorIngresos implements View.OnClickListener,AdapterView.OnI
             ingresos_list.add(new DatoIngreso("3","empanadas ricas3","700","7-5-5"));
             cambio.putExtra("datos",ingresos_list);
             vista.startActivity(cambio);
+        }else if(id==R.id.editar_ingreso){
+            Intent cambio = new Intent(vista, CrearIngreso.class);
+            cambio.putExtra("titulo",vista.findViewById(R.id.ver_titulo_ingreso).toString());
+            cambio.putExtra("descripcion",vista.findViewById(R.id.ver_descripcion_ingreso).toString());
+            cambio.putExtra("valor",vista.findViewById(R.id.ver_valor_ingreso).toString());
+            cambio.putExtra("fecha",vista.findViewById(R.id.ver_fecha_ingreso).toString());
+            cambio.putExtra("id",vista.getIntent().getStringExtra("id"));
+            cambio.putExtra("tipo","modificar");
+            vista.startActivity(cambio);
+        }else if(id==R.id.eliminar_ingreso){
+            Toast.makeText(vista.getApplicationContext(), "Eliminar", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -73,6 +93,7 @@ public class ControladorIngresos implements View.OnClickListener,AdapterView.OnI
 
         Intent cambio = new Intent(vista, VerIngreso.class);
         String id_ingre = actual.getId();
+        cambio.putExtra("id",id);
         cambio.putExtra("titulo",actual.getTitulo());
         cambio.putExtra("descripcion",actual.getDescripcion());
         cambio.putExtra("valor",actual.getValor());

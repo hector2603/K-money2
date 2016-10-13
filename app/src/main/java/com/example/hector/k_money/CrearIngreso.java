@@ -1,11 +1,13 @@
 package com.example.hector.k_money;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +17,7 @@ import android.widget.Toast;
 
 public class CrearIngreso extends AppCompatActivity {
     EditText titulo;
-    EditText descriptcion;
+    EditText descripcion;
     EditText valor;
     EditText fecha;
     Button crear;
@@ -26,7 +28,22 @@ public class CrearIngreso extends AppCompatActivity {
         setContentView(R.layout.activity_crear_ingreso);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Crear Ingreso");
+        //obteniendo componentes de la vista
+        titulo = (EditText) findViewById(R.id.titulo_ingreso);
+        descripcion = (EditText) findViewById(R.id.descripcion_ingreso);
+        valor = (EditText) findViewById(R.id.valor_ingreso);
+        fecha = (EditText) findViewById(R.id.fecha_ingreso);
+        //obteniendo intent para determinar si es crear o modificar
+        Intent datos = getIntent();
+        if(datos.getStringExtra("tipo").equals("crear")){
+            getSupportActionBar().setTitle("Crear Ingreso");
+        }else{
+            getSupportActionBar().setTitle("Modificar Ingreso");
+            titulo.setText(datos.getStringExtra("titulo"));
+            descripcion.setText(datos.getStringExtra("descripcion"));
+            valor.setText(datos.getStringExtra("valor"));
+            fecha.setText(datos.getStringExtra("fecha"));
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +76,8 @@ public class CrearIngreso extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.Ingreso) {
+            Intent cambio = new Intent(CrearIngreso.this,Ingresos.class);
+            startActivity(cambio);
             return true;
         }else if(id==R.id.Egreso){
             Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();

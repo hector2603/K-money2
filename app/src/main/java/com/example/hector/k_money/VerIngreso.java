@@ -9,11 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class VerIngreso extends AppCompatActivity {
     TextView titulo,descripcion,valor,fecha;
+    Button Editar,Eliminar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,8 @@ public class VerIngreso extends AppCompatActivity {
         descripcion = (TextView) findViewById(R.id.ver_descripcion_ingreso);
         valor = (TextView) findViewById(R.id.ver_valor_ingreso);
         fecha = (TextView) findViewById(R.id.ver_fecha_ingreso);
+        Editar = (Button) findViewById(R.id.editar_ingreso);
+        Eliminar = (Button) findViewById(R.id.eliminar_ingreso);
         // obteniendo el intent para los datos
         Intent cambio = getIntent();
         //Extrayendo el extra de tipo cadena
@@ -49,6 +53,12 @@ public class VerIngreso extends AppCompatActivity {
         descripcion.setText(descrip);
         valor.setText(val);
         fecha.setText(date);
+        //creando controlador para el oyente de los botonesde eliminar y editar
+        ControladorIngresos controlador = new ControladorIngresos(this);
+        //asignando el oyente
+        Editar.setOnClickListener(controlador);
+        Eliminar.setOnClickListener(controlador);
+
 
     }
 
@@ -66,6 +76,8 @@ public class VerIngreso extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.Ingreso) {
+            Intent cambio = new Intent(VerIngreso.this,Ingresos.class);
+            startActivity(cambio);
             return true;
         }else if(id==R.id.Egreso){
             Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();

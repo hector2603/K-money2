@@ -71,6 +71,7 @@ public class Ingresos extends AppCompatActivity implements OnClickListener{
 
         if(id== R.id.crear_ingreso){
             Intent cambio = new Intent(Ingresos.this, CrearIngreso.class);
+            cambio.putExtra("tipo","crear");
             startActivity(cambio);
         }
 
