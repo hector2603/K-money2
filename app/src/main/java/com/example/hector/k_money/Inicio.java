@@ -34,12 +34,6 @@ public class Inicio extends AppCompatActivity {
         MiBaseDatos MDB = new MiBaseDatos(getApplicationContext());
         //MDB.insertarIngreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
         //MDB.insertarEgreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
-        try {
-            Log.d("Ingresos: ", MDB.ingresos());
-            Log.d("Egresos: ", MDB.egresos());
-        }catch (Exception e){
-            Log.d("Egresos: ", "0");
-        }
         //MDB.insertarIngreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
         //recuperar datos
         //MDB.borrarIngreso(0);
@@ -51,8 +45,20 @@ public class Inicio extends AppCompatActivity {
 
         //  aquí va el dinero
         TextView utilidad = (TextView) findViewById(R.id.Utilidad);
-        utilidad.setText("Aqui va el numero");
-
+        int ingresos, egresos, utility;
+        try{
+            ingresos = Integer.parseInt(MDB.ingresos());
+        }catch (Exception e){
+            ingresos = 0;
+        }
+        try{
+            egresos = Integer.parseInt(MDB.egresos());
+        }catch (Exception io){
+            egresos = 0;
+        }
+        utility = ingresos - egresos;
+        String dinero = ""+utility;
+        utilidad.setText(dinero);
     }
 
     @Override
