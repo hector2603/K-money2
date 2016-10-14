@@ -75,7 +75,7 @@ public class Egresos extends AppCompatActivity implements View.OnClickListener{
         int id = v.getId();
 
         if(id== R.id.crear_egreso){
-            Intent cambio = new Intent(Egresos.this, CrearIngreso.class);
+            Intent cambio = new Intent(Egresos.this, CrearEgreso.class);
             cambio.putExtra("tipo","crear");
             startActivity(cambio);
         }

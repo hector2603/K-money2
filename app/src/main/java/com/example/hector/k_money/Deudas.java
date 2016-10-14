@@ -6,57 +6,45 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-public class Inicio extends AppCompatActivity {
-
+public class Deudas extends AppCompatActivity implements View.OnClickListener{
+    Button crear, consultar;
+    ControladorDeudas controlador;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inicio);
+        setContentView(R.layout.activity_deudas);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Creando controlador
+        controlador = new ControladorDeudas(this);
+
+        //obteniendo componentes de la ventana
+        crear = (Button) findViewById(R.id.crear_Deuda);
+        consultar = (Button) findViewById(R.id.Consultar_Deudas);
+        crear.setOnClickListener(this);
+        consultar.setOnClickListener(controlador);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Holaaa", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
-        //Prueba de DB
-        MiBaseDatos MDB = new MiBaseDatos(getApplicationContext());
-        //MDB.insertarIngreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
-        //MDB.insertarEgreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
-        try {
-            Log.d("Ingresos: ", MDB.ingresos());
-            Log.d("Egresos: ", MDB.egresos());
-        }catch (Exception e){
-            Log.d("Egresos: ", "0");
-        }
-        //MDB.insertarIngreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
-        //recuperar datos
-        //MDB.borrarIngreso(0);
-        /*int[] ids = new int[MDB.consultarIngresos().size()];
-        for(int i=0; i < MDB.consultarIngresos().size(); i++){
-            ids[i] = MDB.consultarIngresos().get(i).getId();
-            Log.d("hola encontro uno",""+ids[i]);
-        }*/
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_inicio, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -66,19 +54,30 @@ public class Inicio extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.Ingreso) {
-            Intent cambio = new Intent(Inicio.this,Ingresos.class);
+            Intent cambio = new Intent(Deudas.this,Ingresos.class);
             startActivity(cambio);
             return true;
         }else if(id==R.id.Egreso){
-            Intent cambio = new Intent(Inicio.this,Egresos.class);
-            startActivity(cambio);
+            Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();
             return true;
         }else if(id==R.id.Deudas){
-            Intent cambio = new Intent(Inicio.this,Deudas.class);
-            startActivity(cambio);
+            Toast.makeText(getApplicationContext(), "Deuda", Toast.LENGTH_SHORT).show();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+
+        if(id== R.id.crear_Deuda){
+            Intent cambio = new Intent(Deudas.this, CrearIngreso.class);
+            cambio.putExtra("tipo","crear");
+            startActivity(cambio);
+        }
+
+
     }
 }

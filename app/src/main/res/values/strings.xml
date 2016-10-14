@@ -27,4 +27,8 @@
     <string name="title_activity_crear_egreso">CrearEgreso</string>
     <string name="title_activity_consultar_egreso">ConsultarEgreso</string>
     <string name="title_activity_ver_egreso">VerEgreso</string>
+    <string name="title_activity_deudas">Deudas</string>
+    <string name="deudas">Deudas</string>
+    <string name="crear_deuda">Crear Deuda</string>
+    <string name="Consultar_Deudas">Consultar Deudas</string>
 </resources>
