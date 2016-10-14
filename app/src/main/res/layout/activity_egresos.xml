@@ -21,7 +21,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_egresos" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -30,6 +29,9 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email"
-        app:backgroundTint="?android:attr/floatingToolbarForegroundColor" />
+        app:backgroundTint="@android:color/black"  />
+
+    <include layout="@layout/content_egresos" />
+
 
 </android.support.design.widget.CoordinatorLayout>
