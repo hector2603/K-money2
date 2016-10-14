@@ -13,7 +13,7 @@ public class DatoEgreso implements Serializable {
     String descripcion;
     int valor;
     String fecha;
-    
+
     public DatoEgreso(int i,String t, String d, int v,String f){
         id = i;
         titulo = t;

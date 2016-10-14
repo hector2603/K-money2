@@ -20,6 +20,8 @@ public class MiBaseDatos extends SQLiteOpenHelper{
     //sentencia para la creacion de una tabla
     private static final String TABLA_INGRESOS =  "CREATE TABLE ingresos" +
             "(id_ingresos INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, descripcion TEXT, valor INT, fecha DATE)";
+    private static final String TABLA_EGRESOS =  "CREATE TABLE egresos" +
+            "(id_egresos INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, descripcion TEXT, valor INT, fecha DATE)";
 
     public MiBaseDatos(Context context) {
         super(context, NOMBRE_BASEDATOS, null, VERSION_BASEDATOS);
@@ -27,14 +29,18 @@ public class MiBaseDatos extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(TABLA_EGRESOS);
         db.execSQL(TABLA_INGRESOS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXIST ingresos");
+        db.execSQL("DROP TABLE IF EXIST " +TABLA_INGRESOS);
+        db.execSQL("DROP TABLE IF EXIST " +TABLA_EGRESOS);
         onCreate(db);
     }
+
+    // CRUD PARA INGRESO
 
     public void insertarIngreso(String titulo, String descripcion, int valor, String fecha){
         SQLiteDatabase db = getWritableDatabase();
@@ -82,5 +88,95 @@ public class MiBaseDatos extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         db.delete("ingresos", "id_ingresos="+id, null);
         db.close();
+    }
+
+    // CRUD PARA EGRESO
+
+    public void insertarEgreso(String titulo, String descripcion, int valor, String fecha){
+        SQLiteDatabase db = getWritableDatabase();
+        if(db != null){
+            ContentValues valores = new ContentValues();
+            //valores.put("id_ingresos", id);
+            valores.put("titulo", titulo);
+            valores.put("descripcion", descripcion);
+            valores.put("valor", valor);
+            valores.put("fecha", fecha);
+            db.insert("egresos", null, valores);
+            db.close();
+        }
+    }
+
+    public ArrayList<DatoEgreso> consultarEgresos(){
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<DatoEgreso> listaEgresos = new ArrayList<DatoEgreso>();
+        String[] valores_recuperar = {"id_egresos","titulo","descripcion","valor","fecha"};
+        Cursor c = db.query("egresos", valores_recuperar, null, null, null, null, null, null);
+        c.moveToFirst();
+        do{
+            DatoEgreso datoEgreso = new DatoEgreso(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3),
+                    c.getString(4));
+            listaEgresos.add(datoEgreso);
+        } while(c.moveToNext());
+        db.close();
+        c.close();
+        return listaEgresos;
+    }
+
+    public void modificarEgreso(int id, String titulo, String descripcion, int valor, String fecha){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put("id_egresos", id);
+        valores.put("titulo", titulo);
+        valores.put("descripcion", descripcion);
+        valores.put("valor", valor);
+        valores.put("fecha", fecha);
+        db.update("egresos", valores, "id_egresos="+id, null);
+        db.close();
+    }
+
+    public void borrarEgreso(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete("egresos", "id_egresos="+id, null);
+        db.close();
+    }
+
+    //CONSULTAS PROPIAS
+
+    public String ingresos(){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT sum(valor) AS TotalIngresos FROM ingresos", null);
+        String result = null;
+        if (c.moveToFirst()) {
+            //Recorremos el cursor hasta que no haya más registro
+            try {
+                result= c.getString(0);
+                c.close();
+            }catch (Exception o){
+                result= "0";
+            }
+        }else{
+            result = "NADA";
+        }
+        db.close();
+        return result;
+    }
+
+    public String egresos(){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT sum(valor) AS TotalEgresos FROM egresos", null);
+        String result = null;
+        if (c.moveToFirst()) {
+            //Recorremos el cursor hasta que no haya más registro
+            try {
+                result= c.getString(0);
+                c.close();
+            }catch (Exception o){
+                result= "0";
+            }
+        }else{
+            result = "NADA";
+        }
+        db.close();
+        return result;
     }
 }

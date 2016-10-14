@@ -20,6 +20,7 @@ public class ControladorEgreso implements View.OnClickListener,AdapterView.OnIte
     MiBaseDatos MDB ;
 
     public ControladorEgreso(AppCompatActivity v){
+        MDB = new MiBaseDatos(v.getApplicationContext());
         vista = v;
     }
 

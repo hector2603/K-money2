@@ -31,8 +31,14 @@ public class Inicio extends AppCompatActivity {
         });
         //Prueba de DB
         MiBaseDatos MDB = new MiBaseDatos(getApplicationContext());
-        //MDB.insertarIngreso("HOLA", "HOLADESCRI", 123546, "12/01/2016");
-        //MDB.insertarIngreso("HOLA2", "HOLADESCRI", 123546, "12/01/2016");
+        //MDB.insertarIngreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
+        //MDB.insertarEgreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
+        try {
+            Log.d("Ingresos: ", MDB.ingresos());
+            Log.d("Egresos: ", MDB.egresos());
+        }catch (Exception e){
+            Log.d("Egresos: ", "0");
+        }
         //MDB.insertarIngreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
         //recuperar datos
         //MDB.borrarIngreso(0);
