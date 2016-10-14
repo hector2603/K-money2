@@ -99,6 +99,33 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hector.k_money.Inicio" />
         </activity>
+        <activity
+            android:name=".CrearDeuda"
+            android:label="@string/title_activity_crear_deuda"
+            android:parentActivityName=".Deudas"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hector.k_money.Deudas" />
+        </activity>
+        <activity
+            android:name=".ConsultarDeudas"
+            android:label="@string/title_activity_consultar_deudas"
+            android:parentActivityName=".Deudas"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hector.k_money.Deudas" />
+        </activity>
+        <activity
+            android:name=".VerDeuda"
+            android:label="@string/title_activity_ver_deuda"
+            android:parentActivityName=".ConsultarDeudas"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hector.k_money.ConsultarDeudas" />
+        </activity>
     </application>
 
 </manifest>

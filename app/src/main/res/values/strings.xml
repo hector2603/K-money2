@@ -31,4 +31,10 @@
     <string name="deudas">Deudas</string>
     <string name="crear_deuda">Crear Deuda</string>
     <string name="Consultar_Deudas">Consultar Deudas</string>
+    <string name="title_activity_crear_deuda">CrearDeuda</string>
+    <string name="NombrePrestado">Nombre Del prestador:*</string>
+    <string name="ValorPrestamo">Valor Del Prestamo:*</string>
+    <string name="FechaPago">Fecha de Pago:*</string>
+    <string name="title_activity_consultar_deudas">ConsultarDeudas</string>
+    <string name="title_activity_ver_deuda">VerDeuda</string>
 </resources>

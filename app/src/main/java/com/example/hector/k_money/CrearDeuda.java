@@ -10,25 +10,46 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
-public class Deudas extends AppCompatActivity implements View.OnClickListener{
-    Button crear, consultar;
+public class CrearDeuda extends AppCompatActivity {
+    EditText titulo;
+    EditText descripcion;
+    EditText valor;
+    EditText fecha;
+    EditText nombre;
+    Button crear;
     ControladorDeudas controlador;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deudas);
+        setContentView(R.layout.activity_crear_deuda);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //obteniendo componentes de la vista
+        titulo = (EditText) findViewById(R.id.TituloDeudas);
+        descripcion = (EditText) findViewById(R.id.descripcion_Deudas);
+        valor = (EditText) findViewById(R.id.valor_Deudas);
+        fecha = (EditText) findViewById(R.id.fecha_Deudas);
+        nombre = (EditText) findViewById(R.id.NombresPrestadorDeudas);
+        //obteniendo intent para determinar si es crear o modificar
+        Intent datos = getIntent();
+        if(datos.getStringExtra("tipo").equals("crear")){
+            getSupportActionBar().setTitle("Crear Deuda");
+        }else{
+            getSupportActionBar().setTitle("Modificar Deuda ");
+            titulo.setText(datos.getStringExtra("titulo"));
+            descripcion.setText(datos.getStringExtra("descripcion"));
+            valor.setText(datos.getStringExtra("valor"));
+            fecha.setText(datos.getStringExtra("fecha"));
+            nombre.setText(datos.getStringExtra("nombre"));
+        }
         //Creando controlador
         controlador = new ControladorDeudas(this);
-
-        //obteniendo componentes de la ventana
-        crear = (Button) findViewById(R.id.crear_Deuda);
-        consultar = (Button) findViewById(R.id.Consultar_Deudas);
-        crear.setOnClickListener(this);
-        consultar.setOnClickListener(controlador);
+        //obteniendo componentes de la vista
+        crear = (Button) findViewById(R.id.create_Deuda);
+        crear.setOnClickListener(controlador);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +61,8 @@ public class Deudas extends AppCompatActivity implements View.OnClickListener{
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_inicio, menu);
@@ -54,30 +77,20 @@ public class Deudas extends AppCompatActivity implements View.OnClickListener{
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.Ingreso) {
-            Intent cambio = new Intent(Deudas.this,Ingresos.class);
+            Intent cambio = new Intent(CrearDeuda.this,Ingresos.class);
             startActivity(cambio);
             return true;
         }else if(id==R.id.Egreso){
-            Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(CrearDeuda.this,Egresos.class);
+            startActivity(cambio);
             return true;
         }else if(id==R.id.Deudas){
-            Toast.makeText(getApplicationContext(), "Deuda", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(CrearDeuda.this,Deudas.class);
+            startActivity(cambio);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-
-        if(id== R.id.crear_Deuda){
-            Intent cambio = new Intent(Deudas.this, CrearDeuda.class);
-            cambio.putExtra("tipo","crear");
-            startActivity(cambio);
-        }
-
-
-    }
 }

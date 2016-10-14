@@ -9,26 +9,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
-public class Deudas extends AppCompatActivity implements View.OnClickListener{
-    Button crear, consultar;
+import java.util.ArrayList;
+
+public class ConsultarDeudas extends AppCompatActivity {
+    ListView listaDeudas;
+    AdapterDeuda datos;
     ControladorDeudas controlador;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deudas);
+        setContentView(R.layout.activity_consultar_deudas);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //Creando controlador
-        controlador = new ControladorDeudas(this);
 
-        //obteniendo componentes de la ventana
-        crear = (Button) findViewById(R.id.crear_Deuda);
-        consultar = (Button) findViewById(R.id.Consultar_Deudas);
-        crear.setOnClickListener(this);
-        consultar.setOnClickListener(controlador);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -39,7 +36,20 @@ public class Deudas extends AppCompatActivity implements View.OnClickListener{
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //Obteniendo componentes de la vista
+        listaDeudas = (ListView) findViewById(R.id.lista_deudas);
+        // creando intent para recibir los datos del controlador
+        Intent cambio = getIntent();
+        // recibir el rray list del controlador con todos los datos
+        ArrayList<DatoDeudas> deudas_list = (ArrayList<DatoDeudas>)cambio.getSerializableExtra("datos");
+        // al listview le asigna el adepter con la lista
+        datos = new AdapterDeuda(this ,deudas_list);
+        listaDeudas.setAdapter(datos);
+        //a la lista le asigna el oyente, que sera controlador
+        controlador = new ControladorDeudas(this);
+        listaDeudas.setOnItemClickListener(controlador);
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_inicio, menu);
@@ -54,30 +64,20 @@ public class Deudas extends AppCompatActivity implements View.OnClickListener{
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.Ingreso) {
-            Intent cambio = new Intent(Deudas.this,Ingresos.class);
+            Intent cambio = new Intent(ConsultarDeudas.this,Ingresos.class);
             startActivity(cambio);
             return true;
         }else if(id==R.id.Egreso){
-            Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(ConsultarDeudas.this,Egresos.class);
+            startActivity(cambio);
             return true;
         }else if(id==R.id.Deudas){
-            Toast.makeText(getApplicationContext(), "Deuda", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(ConsultarDeudas.this,Deudas.class);
+            startActivity(cambio);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-
-        if(id== R.id.crear_Deuda){
-            Intent cambio = new Intent(Deudas.this, CrearDeuda.class);
-            cambio.putExtra("tipo","crear");
-            startActivity(cambio);
-        }
-
-
-    }
 }
