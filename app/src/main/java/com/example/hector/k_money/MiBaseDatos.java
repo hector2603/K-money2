@@ -74,7 +74,7 @@ public class MiBaseDatos extends SQLiteOpenHelper{
         valores.put("descripcion", descripcion);
         valores.put("valor", valor);
         valores.put("fecha", fecha);
-        db.update("ingresos", valores, "id_ingreso="+id, null);
+        db.update("ingresos", valores, "id_ingresos="+id, null);
         db.close();
     }
 

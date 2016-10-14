@@ -16,13 +16,15 @@ import android.widget.Toast;
 public class VerIngreso extends AppCompatActivity {
     TextView titulo,descripcion,valor,fecha;
     Button Editar,Eliminar;
+    private int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_ingreso);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Ver Ingreso");
+        id = getIntent().getIntExtra("identificador",15);
+        getSupportActionBar().setTitle("Ver Ingreso ");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -46,12 +48,12 @@ public class VerIngreso extends AppCompatActivity {
         //Extrayendo el extra de tipo cadena
         String title = cambio.getStringExtra("titulo");
         String descrip = cambio.getStringExtra("descripcion");
-        String val = cambio.getStringExtra("valor");
+        int val = cambio.getIntExtra("valor",0);
         String date = cambio.getStringExtra("fecha");
         // asignando valores a los campos
         titulo.setText(title);
         descripcion.setText(descrip);
-        valor.setText(val);
+        valor.setText(""+val);
         fecha.setText(date);
         //creando controlador para el oyente de los botonesde eliminar y editar
         ControladorIngresos controlador = new ControladorIngresos(this);
@@ -88,6 +90,10 @@ public class VerIngreso extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public int getId(){
+        return id;
     }
 
 }

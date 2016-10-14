@@ -22,6 +22,7 @@ public class CrearIngreso extends AppCompatActivity {
     EditText fecha;
     Button crear;
     ControladorIngresos controlador;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,7 @@ public class CrearIngreso extends AppCompatActivity {
         if(datos.getStringExtra("tipo").equals("crear")){
             getSupportActionBar().setTitle("Crear Ingreso");
         }else{
-            getSupportActionBar().setTitle("Modificar Ingreso");
+            getSupportActionBar().setTitle("Modificar Ingreso ");
             titulo.setText(datos.getStringExtra("titulo"));
             descripcion.setText(datos.getStringExtra("descripcion"));
             valor.setText(datos.getStringExtra("valor"));

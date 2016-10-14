@@ -63,7 +63,7 @@
         android:textColor="@android:color/background_dark" />
 
     <TextView
-        android:text="@string/valor"
+        android:text="@string/fecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView13"

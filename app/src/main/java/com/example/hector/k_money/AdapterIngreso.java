@@ -63,7 +63,7 @@ public class AdapterIngreso extends ArrayAdapter<DatoIngreso> {
 
         // Setup.
         title.setText(dato.getTitulo());
-        valor.setText(dato.getValor());
+        valor.setText(""+dato.getValor());
         fecha.setText(dato.getFecha());
 
         return convertView;
