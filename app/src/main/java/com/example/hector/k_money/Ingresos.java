@@ -55,10 +55,12 @@ public class Ingresos extends AppCompatActivity implements OnClickListener{
         if (id == R.id.Ingreso) {
             return true;
         }else if(id==R.id.Egreso){
-            Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(Ingresos.this,Deudas.class);
+            startActivity(cambio);
             return true;
         }else if(id==R.id.Deudas){
-            Toast.makeText(getApplicationContext(), "Deuda", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(Ingresos.this,Deudas.class);
+            startActivity(cambio);
             return true;
         }
 

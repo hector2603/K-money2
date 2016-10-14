@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Inicio extends AppCompatActivity {
@@ -47,6 +48,10 @@ public class Inicio extends AppCompatActivity {
             ids[i] = MDB.consultarIngresos().get(i).getId();
             Log.d("hola encontro uno",""+ids[i]);
         }*/
+
+        //  aquí va el dinero
+        TextView utilidad = (TextView) findViewById(R.id.Utilidad);
+        utilidad.setText("Aqui va el numero");
 
     }
 

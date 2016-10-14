@@ -25,7 +25,7 @@ public class ConsultarDeudas extends AppCompatActivity {
         setContentView(R.layout.activity_consultar_deudas);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setTitle("Consultar Deudas");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

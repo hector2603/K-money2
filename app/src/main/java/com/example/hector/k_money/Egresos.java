@@ -63,7 +63,8 @@ public class Egresos extends AppCompatActivity implements View.OnClickListener{
             Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();
             return true;
         }else if(id==R.id.Deudas){
-            Toast.makeText(getApplicationContext(), "Deuda", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(Egresos.this,Deudas.class);
+            startActivity(cambio);
             return true;
         }
 

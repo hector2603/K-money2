@@ -30,4 +30,26 @@
         app:srcCompat="@drawable/logo"
         android:id="@+id/imageView"
         android:contentDescription="@string/logotipo" />
+
+    <TextView
+        android:text="@string/Utilidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView10"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAlignment="center"
+        android:textColor="@android:color/black" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="41dp" />
+
+    <TextView
+        android:text="@string/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Utilidad"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAlignment="center"
+        android:textColor="@android:color/black" />
 </LinearLayout>

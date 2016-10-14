@@ -74,7 +74,8 @@ public class consultarIngresos extends AppCompatActivity {
             startActivity(cambio);
             return true;
         }else if(id==R.id.Deudas){
-            Toast.makeText(getApplicationContext(), "Deuda", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(consultarIngresos.this,Deudas.class);
+            startActivity(cambio);
             return true;
         }
 

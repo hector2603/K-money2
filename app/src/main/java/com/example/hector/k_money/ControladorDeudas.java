@@ -19,6 +19,7 @@ public class ControladorDeudas implements View.OnClickListener, AdapterView.OnIt
     MiBaseDatos MDB ;
 
     public ControladorDeudas(AppCompatActivity v) {
+        MDB = new MiBaseDatos(v.getApplicationContext());
         vista = v;
     }
 
@@ -37,18 +38,18 @@ public class ControladorDeudas implements View.OnClickListener, AdapterView.OnIt
             }else{
                 if(vista.getIntent().getStringExtra("tipo").equals("crear")){
                     Toast.makeText(vista.getApplicationContext(), "Creado", Toast.LENGTH_SHORT).show();
-                    //MDB.insertarEgreso(titulo.getText().toString(), descripcion.getText().toString(), Integer.parseInt(valor.getText().toString()), fecha.getText().toString());
+                    MDB.insertarDeuda(titulo.getText().toString(),nombre.getText().toString(), descripcion.getText().toString(), Integer.parseInt(valor.getText().toString()), fecha.getText().toString());
                     Intent cambio = new Intent(vista, ConsultarDeudas.class);
-                    //ArrayList<DatoEgreso> egresos_list = MDB.consultarEgresos();
-                    //cambio.putExtra("datos", egresos_list);
+                    ArrayList<DatoDeudas> deuda_list = MDB.consultarDeudas();
+                    cambio.putExtra("datos", deuda_list);
                     vista.startActivity(cambio);
                 }else if(vista.getIntent().getStringExtra("tipo").equals("modificar")){
                     int identificador = vista.getIntent().getIntExtra("identificadorModi",20);
-                    Intent cambio = new Intent(vista, ControladorDeudas.class);
+                    Intent cambio = new Intent(vista, ConsultarDeudas.class);
                     //.makeText(vista.getApplicationContext(), "Modificado  "+identificador, Toast.LENGTH_SHORT).show();
-                    //MDB.modificarEgreso(identificador,titulo.getText().toString(), descripcion.getText().toString(), Integer.parseInt(valor.getText().toString()), fecha.getText().toString());
-                    //ArrayList<DatoEgreso> egresos_list = MDB.consultarEgresos();
-                    //cambio.putExtra("datos",egresos_list);
+                    MDB.modificarDeudas(identificador,titulo.getText().toString(),nombre.getText().toString(), descripcion.getText().toString(), Integer.parseInt(valor.getText().toString()), fecha.getText().toString());
+                    ArrayList<DatoDeudas> deuda_list = MDB.consultarDeudas();
+                    cambio.putExtra("datos", deuda_list);
                     vista.startActivity(cambio);
                 }else{
                     Toast.makeText(vista.getApplicationContext(), "No pasa nada", Toast.LENGTH_SHORT).show();
@@ -59,12 +60,8 @@ public class ControladorDeudas implements View.OnClickListener, AdapterView.OnIt
         }else if(id==R.id.Consultar_Deudas){
 
             Intent cambio = new Intent(vista, ConsultarDeudas.class);
-            ArrayList<DatoDeudas> deuda_list = new ArrayList<DatoDeudas>();
-            //ArrayList<DatoEgreso> egreso_list = new ArrayList<DatoEgreso>();
-            deuda_list.add(new DatoDeudas(1,"empanaditas riquitas","empanadas ricas","descrip",500,"5-5-5"));
-            deuda_list.add(new DatoDeudas(2,"empanadas malucas","empanadas ricas2","descript",600,"6-5-5"));
-            deuda_list.add(new DatoDeudas(3,"La cuestion es de hambre","empanadas ricas3","descript",700,"7-5-5"));
-            cambio.putExtra("datos",deuda_list);
+            ArrayList<DatoDeudas> deuda_list = MDB.consultarDeudas();
+            cambio.putExtra("datos", deuda_list);
             vista.startActivity(cambio);
 
         }else if(id==R.id.editar_Deuda){
@@ -89,13 +86,13 @@ public class ControladorDeudas implements View.OnClickListener, AdapterView.OnIt
         }else if(id==R.id.eliminar_Deuda){
             VerDeuda vistica = (VerDeuda)vista;
             int identificador = vistica.getId();
-            //MDB.borrarEgreso(identificador);
+            MDB.borrarDeudas(identificador);
             Toast.makeText(vista.getApplicationContext(), "Egreso eliminado "+identificador, Toast.LENGTH_SHORT).show();
 
-            //Intent cambio = new Intent(vista, ConsultarEgreso.class);
-            //ArrayList<DatoEgreso> egresos_list = MDB.consultarEgresos();
-            //cambio.putExtra("datos",egresos_list);
-            //vista.startActivity(cambio);
+            Intent cambio = new Intent(vista, ConsultarDeudas.class);
+            ArrayList<DatoDeudas> deuda_list = MDB.consultarDeudas();
+            cambio.putExtra("datos", deuda_list);
+            vista.startActivity(cambio);
         }
     }
 

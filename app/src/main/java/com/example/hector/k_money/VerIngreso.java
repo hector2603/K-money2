@@ -82,10 +82,12 @@ public class VerIngreso extends AppCompatActivity {
             startActivity(cambio);
             return true;
         }else if(id==R.id.Egreso){
-            Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(VerIngreso.this,Egresos.class);
+            startActivity(cambio);
             return true;
         }else if(id==R.id.Deudas){
-            Toast.makeText(getApplicationContext(), "Deuda", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(VerIngreso.this,Deudas.class);
+            startActivity(cambio);
             return true;
         }
 
