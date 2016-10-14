@@ -20,4 +20,8 @@
     <string name="eliminar">Eliminar</string>
     <string name="guardar">Guardar</string>
     <string name="title_activity_consultar_ingresos">consultarIngresos</string>
+    <string name="title_activity_egresos">Egresos</string>
+    <string name="egresos">Egresos</string>
+    <string name="crear_egresos">Crear Egreso</string>
+    <string name="consultar_egreso" >Consultar Egreso</string>
 </resources>

@@ -102,6 +102,9 @@ public class ControladorIngresos implements View.OnClickListener,AdapterView.OnI
             int identificador = vistica.getId();
             MDB.borrarIngreso(identificador);
             Toast.makeText(vista.getApplicationContext(), "Ingreso eliminado", Toast.LENGTH_SHORT).show();
+
+
+            
             Intent cambio = new Intent(vista, consultarIngresos.class);
             ArrayList<DatoIngreso> ingresos_list = MDB.consultarIngresos();
             cambio.putExtra("datos",ingresos_list);

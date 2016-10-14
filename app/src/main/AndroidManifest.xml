@@ -54,6 +54,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hector.k_money.Ingresos" />
         </activity>
+        <activity
+            android:name=".Egresos"
+            android:label="@string/title_activity_egresos"
+            android:parentActivityName=".Inicio"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hector.k_money.Inicio" />
+        </activity>
     </application>
 
 </manifest>
