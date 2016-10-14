@@ -36,11 +36,11 @@ public class Inicio extends AppCompatActivity {
         //MDB.insertarIngreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
         //recuperar datos
         //MDB.borrarIngreso(0);
-        int[] ids = new int[MDB.consultarIngresos().size()];
+        /*int[] ids = new int[MDB.consultarIngresos().size()];
         for(int i=0; i < MDB.consultarIngresos().size(); i++){
             ids[i] = MDB.consultarIngresos().get(i).getId();
             Log.d("hola encontro uno",""+ids[i]);
-        }
+        }*/
 
     }
 
