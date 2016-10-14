@@ -38,18 +38,18 @@ public class ControladorEgreso implements View.OnClickListener,AdapterView.OnIte
             }else{
                 if(vista.getIntent().getStringExtra("tipo").equals("crear")){
                     Toast.makeText(vista.getApplicationContext(), "Creado", Toast.LENGTH_SHORT).show();
-                    //MDB.insertarIngreso(titulo.getText().toString(), descripcion.getText().toString(), Integer.parseInt(valor.getText().toString()), fecha.getText().toString());
+                    MDB.insertarEgreso(titulo.getText().toString(), descripcion.getText().toString(), Integer.parseInt(valor.getText().toString()), fecha.getText().toString());
                     Intent cambio = new Intent(vista, ConsultarEgreso.class);
-                    //ArrayList<DatoIngreso> ingresos_list = MDB.consultarIngresos();
-                    //cambio.putExtra("datos",ingresos_list);
+                    ArrayList<DatoEgreso> egresos_list = MDB.consultarEgresos();
+                    cambio.putExtra("datos", egresos_list);
                     vista.startActivity(cambio);
                 }else if(vista.getIntent().getStringExtra("tipo").equals("modificar")){
                     int identificador = vista.getIntent().getIntExtra("identificadorModi",20);
                     Intent cambio = new Intent(vista, ConsultarEgreso.class);
                     //.makeText(vista.getApplicationContext(), "Modificado  "+identificador, Toast.LENGTH_SHORT).show();
-                    //MDB.modificarIngreso(identificador,titulo.getText().toString(), descripcion.getText().toString(), Integer.parseInt(valor.getText().toString()), fecha.getText().toString());
-                    //ArrayList<DatoIngreso> ingresos_list = MDB.consultarIngresos();
-                    //cambio.putExtra("datos",ingresos_list);
+                    MDB.modificarEgreso(identificador,titulo.getText().toString(), descripcion.getText().toString(), Integer.parseInt(valor.getText().toString()), fecha.getText().toString());
+                    ArrayList<DatoEgreso> egresos_list = MDB.consultarEgresos();
+                    cambio.putExtra("datos",egresos_list);
                     vista.startActivity(cambio);
                 }else{
                     Toast.makeText(vista.getApplicationContext(), "No pasa nada", Toast.LENGTH_SHORT).show();
@@ -60,12 +60,12 @@ public class ControladorEgreso implements View.OnClickListener,AdapterView.OnIte
         }else if(id==R.id.consultar_egreso){
 
             Intent cambio = new Intent(vista, ConsultarEgreso.class);
-            //ArrayList<DatoIngreso> ingresos_list = MDB.consultarIngresos();
-            ArrayList<DatoEgreso> egreso_list = new ArrayList<DatoEgreso>();
-            egreso_list.add(new DatoEgreso(1,"empanaditas riquitas","empanadas ricas",500,"5-5-5"));
-            egreso_list.add(new DatoEgreso(2,"empanadas malucas","empanadas ricas2",600,"6-5-5"));
-            egreso_list.add(new DatoEgreso(3,"La cuestion es de hambre","empanadas ricas3",700,"7-5-5"));
-            cambio.putExtra("datos",egreso_list);
+            ArrayList<DatoEgreso> egresos_list = MDB.consultarEgresos();
+            //ArrayList<DatoEgreso> egreso_list = new ArrayList<DatoEgreso>();
+            //egreso_list.add(new DatoEgreso(1,"empanaditas riquitas","empanadas ricas",500,"5-5-5"));
+            //egreso_list.add(new DatoEgreso(2,"empanadas malucas","empanadas ricas2",600,"6-5-5"));
+            //egreso_list.add(new DatoEgreso(3,"La cuestion es de hambre","empanadas ricas3",700,"7-5-5"));
+            cambio.putExtra("datos",egresos_list);
             vista.startActivity(cambio);
 
         }else if(id==R.id.editar_Egreso){
@@ -88,13 +88,13 @@ public class ControladorEgreso implements View.OnClickListener,AdapterView.OnIte
         }else if(id==R.id.eliminar_Egreso){
             VerEgreso vistica = (VerEgreso)vista;
             int identificador = vistica.getId();
-            //MDB.borrarIngreso(identificador);
-            Toast.makeText(vista.getApplicationContext(), "Ingreso eliminado", Toast.LENGTH_SHORT).show();
+            MDB.borrarEgreso(identificador);
+            Toast.makeText(vista.getApplicationContext(), "Egreso eliminado", Toast.LENGTH_SHORT).show();
 
-            //Intent cambio = new Intent(vista, ConsultarEgreso.class);
-            //ArrayList<DatoIngreso> ingresos_list = MDB.consultarIngresos();
-            //cambio.putExtra("datos",ingresos_list);
-            //vista.startActivity(cambio);
+            Intent cambio = new Intent(vista, ConsultarEgreso.class);
+            ArrayList<DatoEgreso> egresos_list = MDB.consultarEgresos();
+            cambio.putExtra("datos",egresos_list);
+            vista.startActivity(cambio);
         }
     }
 
