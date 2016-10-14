@@ -36,6 +36,7 @@ public class consultarIngresos extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //Obteniendo componentes de la vista
         listaIngresos = (ListView) findViewById(R.id.lista_ingresos);
@@ -69,7 +70,8 @@ public class consultarIngresos extends AppCompatActivity {
             startActivity(cambio);
             return true;
         }else if(id==R.id.Egreso){
-            Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(consultarIngresos.this,Egresos.class);
+            startActivity(cambio);
             return true;
         }else if(id==R.id.Deudas){
             Toast.makeText(getApplicationContext(), "Deuda", Toast.LENGTH_SHORT).show();

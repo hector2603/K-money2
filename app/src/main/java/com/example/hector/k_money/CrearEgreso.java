@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,52 +13,51 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class CrearIngreso extends AppCompatActivity {
+public class CrearEgreso extends AppCompatActivity {
     EditText titulo;
     EditText descripcion;
     EditText valor;
     EditText fecha;
     Button crear;
-    ControladorIngresos controlador;
+    ControladorEgreso controlador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_ingreso);
+        setContentView(R.layout.activity_crear_egreso);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //obteniendo componentes de la vista
-        titulo = (EditText) findViewById(R.id.titulo_ingreso);
-        descripcion = (EditText) findViewById(R.id.descripcion_ingreso);
-        valor = (EditText) findViewById(R.id.valor_ingreso);
-        fecha = (EditText) findViewById(R.id.fecha_ingreso);
+        titulo = (EditText) findViewById(R.id.titulo_Egreso);
+        descripcion = (EditText) findViewById(R.id.descripcion_Egreso);
+        valor = (EditText) findViewById(R.id.valor_Egreso);
+        fecha = (EditText) findViewById(R.id.fecha_Egreso);
         //obteniendo intent para determinar si es crear o modificar
         Intent datos = getIntent();
         if(datos.getStringExtra("tipo").equals("crear")){
-            getSupportActionBar().setTitle("Crear Ingreso");
+            getSupportActionBar().setTitle("Crear Egreso");
         }else{
-            getSupportActionBar().setTitle("Modificar Ingreso ");
+            getSupportActionBar().setTitle("Modificar Egreso ");
             titulo.setText(datos.getStringExtra("titulo"));
             descripcion.setText(datos.getStringExtra("descripcion"));
             valor.setText(datos.getStringExtra("valor"));
             fecha.setText(datos.getStringExtra("fecha"));
         }
+        //Creando controlador
+        controlador = new ControladorEgreso(this);
+        //obteniendo componentes de la vista
+        crear = (Button) findViewById(R.id.create_egreso);
+        crear.setOnClickListener(controlador);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Holaaa", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //Creando controlador
-        controlador = new ControladorIngresos(this);
-        //obteniendo componentes de la vista
-        crear = (Button) findViewById(R.id.create_ingreso);
-        crear.setOnClickListener(controlador);
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,11 +74,11 @@ public class CrearIngreso extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.Ingreso) {
-            Intent cambio = new Intent(CrearIngreso.this,Ingresos.class);
+            Intent cambio = new Intent(CrearEgreso.this,Ingresos.class);
             startActivity(cambio);
             return true;
         }else if(id==R.id.Egreso){
-            Intent cambio = new Intent(CrearIngreso.this,Egresos.class);
+            Intent cambio = new Intent(CrearEgreso.this,Egresos.class);
             startActivity(cambio);
             return true;
         }else if(id==R.id.Deudas){

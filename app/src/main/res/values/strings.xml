@@ -23,5 +23,8 @@
     <string name="title_activity_egresos">Egresos</string>
     <string name="egresos">Egresos</string>
     <string name="crear_egresos">Crear Egreso</string>
-    <string name="consultar_egreso" >Consultar Egreso</string>
+    <string name="consultar_egreso">Consultar Egreso</string>
+    <string name="title_activity_crear_egreso">CrearEgreso</string>
+    <string name="title_activity_consultar_egreso">ConsultarEgreso</string>
+    <string name="title_activity_ver_egreso">VerEgreso</string>
 </resources>

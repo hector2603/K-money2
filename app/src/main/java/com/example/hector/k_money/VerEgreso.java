@@ -4,65 +4,62 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class CrearIngreso extends AppCompatActivity {
-    EditText titulo;
-    EditText descripcion;
-    EditText valor;
-    EditText fecha;
-    Button crear;
-    ControladorIngresos controlador;
-
+public class VerEgreso extends AppCompatActivity {
+    TextView titulo,descripcion,valor,fecha;
+    Button Editar,Eliminar;
+    private int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_ingreso);
+        setContentView(R.layout.activity_ver_egreso);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //obteniendo componentes de la vista
-        titulo = (EditText) findViewById(R.id.titulo_ingreso);
-        descripcion = (EditText) findViewById(R.id.descripcion_ingreso);
-        valor = (EditText) findViewById(R.id.valor_ingreso);
-        fecha = (EditText) findViewById(R.id.fecha_ingreso);
-        //obteniendo intent para determinar si es crear o modificar
-        Intent datos = getIntent();
-        if(datos.getStringExtra("tipo").equals("crear")){
-            getSupportActionBar().setTitle("Crear Ingreso");
-        }else{
-            getSupportActionBar().setTitle("Modificar Ingreso ");
-            titulo.setText(datos.getStringExtra("titulo"));
-            descripcion.setText(datos.getStringExtra("descripcion"));
-            valor.setText(datos.getStringExtra("valor"));
-            fecha.setText(datos.getStringExtra("fecha"));
-        }
+        id = getIntent().getIntExtra("identificador",15);
+        getSupportActionBar().setTitle("Ver Egreso ");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Holita", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //Creando controlador
-        controlador = new ControladorIngresos(this);
-        //obteniendo componentes de la vista
-        crear = (Button) findViewById(R.id.create_ingreso);
-        crear.setOnClickListener(controlador);
-
+        // obteniendo los componentes de la vista
+        titulo = (TextView) findViewById(R.id.ver_titulo_Egreso);
+        descripcion = (TextView) findViewById(R.id.ver_descripcion_Egreso);
+        valor = (TextView) findViewById(R.id.ver_valor_Egreso);
+        fecha = (TextView) findViewById(R.id.ver_fecha_Egreso);
+        Editar = (Button) findViewById(R.id.editar_Egreso);
+        Eliminar = (Button) findViewById(R.id.eliminar_Egreso);
+        // obteniendo el intent para los datos
+        Intent cambio = getIntent();
+        //Extrayendo el extra de tipo cadena
+        String title = cambio.getStringExtra("titulo");
+        String descrip = cambio.getStringExtra("descripcion");
+        int val = cambio.getIntExtra("valor",0);
+        String date = cambio.getStringExtra("fecha");
+        // asignando valores a los campos
+        titulo.setText(title);
+        descripcion.setText(descrip);
+        valor.setText(""+val);
+        fecha.setText(date);
+        //creando controlador para el oyente de los botonesde eliminar y editar
+        ControladorEgreso controlador = new ControladorEgreso(this);
+        //asignando el oyente
+        Editar.setOnClickListener(controlador);
+        Eliminar.setOnClickListener(controlador);
     }
-
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_inicio, menu);
@@ -77,12 +74,11 @@ public class CrearIngreso extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.Ingreso) {
-            Intent cambio = new Intent(CrearIngreso.this,Ingresos.class);
+            Intent cambio = new Intent(VerEgreso.this,Ingresos.class);
             startActivity(cambio);
             return true;
         }else if(id==R.id.Egreso){
-            Intent cambio = new Intent(CrearIngreso.this,Egresos.class);
-            startActivity(cambio);
+            Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();
             return true;
         }else if(id==R.id.Deudas){
             Toast.makeText(getApplicationContext(), "Deuda", Toast.LENGTH_SHORT).show();
@@ -90,6 +86,10 @@ public class CrearIngreso extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public int getId(){
+        return id;
     }
 
 }

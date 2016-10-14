@@ -63,6 +63,33 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hector.k_money.Inicio" />
         </activity>
+        <activity
+            android:name=".CrearEgreso"
+            android:label="@string/title_activity_crear_egreso"
+            android:parentActivityName=".Egresos"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hector.k_money.Egresos" />
+        </activity>
+        <activity
+            android:name=".ConsultarEgreso"
+            android:label="@string/title_activity_consultar_egreso"
+            android:parentActivityName=".Egresos"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hector.k_money.Egresos" />
+        </activity>
+        <activity
+            android:name=".VerEgreso"
+            android:label="@string/title_activity_ver_egreso"
+            android:parentActivityName=".ConsultarEgreso"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hector.k_money.ConsultarEgreso" />
+        </activity>
     </application>
 
 </manifest>
