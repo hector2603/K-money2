@@ -22,6 +22,9 @@ public class MiBaseDatos extends SQLiteOpenHelper{
             "(id_ingresos INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, descripcion TEXT, valor INT, fecha DATE)";
     private static final String TABLA_EGRESOS =  "CREATE TABLE egresos" +
             "(id_egresos INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, descripcion TEXT, valor INT, fecha DATE)";
+    private static final String TABLA_DEUDAS =  "CREATE TABLE deudas" +
+            "(id_deudas INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, nombrePrestador TEXT, descripcion TEXT, " +
+            "valor INT, fechaPago DATE)";
 
     public MiBaseDatos(Context context) {
         super(context, NOMBRE_BASEDATOS, null, VERSION_BASEDATOS);
@@ -29,12 +32,14 @@ public class MiBaseDatos extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(TABLA_DEUDAS);
         db.execSQL(TABLA_EGRESOS);
         db.execSQL(TABLA_INGRESOS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXIST " +TABLA_DEUDAS);
         db.execSQL("DROP TABLE IF EXIST " +TABLA_INGRESOS);
         db.execSQL("DROP TABLE IF EXIST " +TABLA_EGRESOS);
         onCreate(db);
@@ -137,6 +142,58 @@ public class MiBaseDatos extends SQLiteOpenHelper{
     public void borrarEgreso(int id){
         SQLiteDatabase db = getWritableDatabase();
         db.delete("egresos", "id_egresos="+id, null);
+        db.close();
+    }
+
+    //CRUD PARA DEUDAS
+
+    public void insertarDeuda(String titulo, String nombrePrestador, String descripcion, int valor, String fechaPago){
+        SQLiteDatabase db = getWritableDatabase();
+        if(db != null){
+            ContentValues valores = new ContentValues();
+            //valores.put("id_ingresos", id);
+            valores.put("titulo", titulo);
+            valores.put("nombrePrestador", nombrePrestador);
+            valores.put("descripcion", descripcion);
+            valores.put("valor", valor);
+            valores.put("fechaPago", fechaPago);
+            db.insert("deudas", null, valores);
+            db.close();
+        }
+    }
+
+    public ArrayList<DatoDeudas> consultarDeudas(){
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<DatoDeudas> listaDeudas = new ArrayList<DatoDeudas>();
+        String[] valores_recuperar = {"id_deudas","titulo", "nombrePrestador", "descripcion","valor","fechaPago"};
+        Cursor c = db.query("deudas", valores_recuperar, null, null, null, null, null, null);
+        c.moveToFirst();
+        do{
+            DatoDeudas datoDeuda = new DatoDeudas(c.getInt(0), c.getString(1), c.getString(2), c.getString(3), c.getInt(4),
+                    c.getString(5));
+            listaDeudas.add(datoDeuda);
+        } while(c.moveToNext());
+        db.close();
+        c.close();
+        return listaDeudas;
+    }
+
+    public void modificarDeudas(int id, String titulo, String nombrePrestador, String descripcion, int valor, String fecha){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put("id_deudas", id);
+        valores.put("titulo", titulo);
+        valores.put("nombrePrestador",nombrePrestador);
+        valores.put("descripcion", descripcion);
+        valores.put("valor", valor);
+        valores.put("fecha", fecha);
+        db.update("deudas", valores, "id_deudas="+id, null);
+        db.close();
+    }
+
+    public void borrarDeudas(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete("deudas", "id_deudas="+id, null);
         db.close();
     }
 
