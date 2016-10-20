@@ -21,15 +21,7 @@ public class Inicio extends AppCompatActivity {
         setContentView(R.layout.activity_inicio);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Holaaa", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        
         //Prueba de DB
         MiBaseDatos MDB = new MiBaseDatos(getApplicationContext());
         //MDB.insertarIngreso("HOLA3", "HOLADESCRI", 123546, "12/01/2016");
@@ -58,7 +50,7 @@ public class Inicio extends AppCompatActivity {
         }
         utility = ingresos - egresos;
         String dinero = ""+utility;
-        utilidad.setText(dinero);
+        utilidad.setText("$ "+dinero);
     }
 
     @Override

@@ -30,13 +30,8 @@ public class Ingresos extends AppCompatActivity implements OnClickListener{
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        OyenteBonton oyFab = new OyenteBonton(this);
+        fab.setOnClickListener(oyFab);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,7 +50,7 @@ public class Ingresos extends AppCompatActivity implements OnClickListener{
         if (id == R.id.Ingreso) {
             return true;
         }else if(id==R.id.Egreso){
-            Intent cambio = new Intent(Ingresos.this,Deudas.class);
+            Intent cambio = new Intent(Ingresos.this,Egresos.class);
             startActivity(cambio);
             return true;
         }else if(id==R.id.Deudas){

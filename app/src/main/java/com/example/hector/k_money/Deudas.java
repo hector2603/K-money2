@@ -31,13 +31,8 @@ public class Deudas extends AppCompatActivity implements View.OnClickListener{
         consultar.setOnClickListener(controlador);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        OyenteBonton oyFab = new OyenteBonton(this);
+        fab.setOnClickListener(oyFab);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,10 +53,10 @@ public class Deudas extends AppCompatActivity implements View.OnClickListener{
             startActivity(cambio);
             return true;
         }else if(id==R.id.Egreso){
-            Toast.makeText(getApplicationContext(), "Egreso", Toast.LENGTH_SHORT).show();
+            Intent cambio = new Intent(Deudas.this,Egresos.class);
+            startActivity(cambio);
             return true;
         }else if(id==R.id.Deudas){
-            Toast.makeText(getApplicationContext(), "Deuda", Toast.LENGTH_SHORT).show();
             return true;
         }
 

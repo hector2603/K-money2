@@ -27,13 +27,8 @@ public class VerEgreso extends AppCompatActivity {
         getSupportActionBar().setTitle("Ver Egreso ");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Holita", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        OyenteBonton oyFab = new OyenteBonton(this);
+        fab.setOnClickListener(oyFab);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // obteniendo los componentes de la vista
         titulo = (TextView) findViewById(R.id.ver_titulo_Egreso);

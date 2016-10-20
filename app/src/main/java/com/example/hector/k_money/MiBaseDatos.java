@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,9 +69,14 @@ public class MiBaseDatos extends SQLiteOpenHelper{
         Cursor c = db.query("ingresos", valores_recuperar, null, null, null, null, null, null);
         c.moveToFirst();
         do{
-            DatoIngreso datoIngreso = new DatoIngreso(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3),
-                    c.getString(4));
-            listaIngresos.add(datoIngreso);
+            try{
+                DatoIngreso datoIngreso = new DatoIngreso(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3),
+                        c.getString(4));
+                listaIngresos.add(datoIngreso);
+            }catch (Exception e){
+
+            }
+
         } while(c.moveToNext());
         db.close();
         c.close();
@@ -118,9 +124,12 @@ public class MiBaseDatos extends SQLiteOpenHelper{
         Cursor c = db.query("egresos", valores_recuperar, null, null, null, null, null, null);
         c.moveToFirst();
         do{
-            DatoEgreso datoEgreso = new DatoEgreso(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3),
-                    c.getString(4));
-            listaEgresos.add(datoEgreso);
+            try{
+                DatoEgreso datoEgreso = new DatoEgreso(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3),
+                        c.getString(4));
+                listaEgresos.add(datoEgreso);
+            }catch (Exception e){
+            }
         } while(c.moveToNext());
         db.close();
         c.close();
@@ -169,9 +178,14 @@ public class MiBaseDatos extends SQLiteOpenHelper{
         Cursor c = db.query("deudas", valores_recuperar, null, null, null, null, null, null);
         c.moveToFirst();
         do{
-            DatoDeudas datoDeuda = new DatoDeudas(c.getInt(0), c.getString(1), c.getString(2), c.getString(3), c.getInt(4),
-                    c.getString(5));
-            listaDeudas.add(datoDeuda);
+            try{
+                DatoDeudas datoDeuda = new DatoDeudas(c.getInt(0), c.getString(1), c.getString(2), c.getString(3), c.getInt(4),
+                        c.getString(5));
+                listaDeudas.add(datoDeuda);
+            }catch (Exception e){
+
+            }
+
         } while(c.moveToNext());
         db.close();
         c.close();
